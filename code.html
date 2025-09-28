@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>コードエディタ</title>
+<style>
+  /* 全体レイアウト */
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+  }
+
+  header {
+    background-color: #282c34;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  /* テキストエリアとボタン */
+  #editor-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  textarea {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus {
+    border-color: #61dafb;
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
+  }
+
+  button {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #61dafb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background: #21a1f1;
+  }
+
+  /* 保存通知 */
+  #toast {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: #21a1f1;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  #toast.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ダークモード切替 */
+  body.dark {
+    background-color: #1e1e1e;
+  }
+
+  body.dark textarea {
+    background-color: #2e2e2e;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+
+  body.dark button {
+    background: #61dafb;
+    color: #000;
+  }
+
+</style>
+</head>
+<body>
+<header>コードエディタ</header>
+<div id="editor-container">
+  <textarea id="code" placeholder="ここにHTML/CSS/JSを書いてね"></textarea>
+  <button id="save">保存してプレビューへ</button>
+</div>
+<div id="toast">保存しました！</div>
+
+<script>
+const textarea = document.getElementById('code');
+const saveBtn = document.getElementById('save');
+const toast = document.getElementById('toast');
+
+// ページ読み込み時に保存データを復元
+textarea.value = localStorage.getItem('userCode') || '';
+
+// 保存ボタン
+saveBtn.addEventListener('click', () => {
+  localStorage.setItem('userCode', textarea.value);
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1500);
+  setTimeout(() => window.location.href = 'view.html', 1600);
+});
+
+// ダークモードを自動検知
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.body.classList.add('dark');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コードエディタ & プレビュー</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* 全体設定 */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #282c34, #4b6cb7);
+      color: white;
+      padding: 3rem 1rem;
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.2rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* メイン */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+    }
+
+    /* ボタン */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: #61dafb;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .button:hover {
+      background: #21a1f1;
+      transform: translateY(-2px);
+    }
+
+    /* フッター */
+    footer {
+      padding: 2rem 1rem;
+      background: #f0f2f5;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* レスポンシブ */
+    @media (min-width: 600px) {
+      main {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>✨ その場で書けるコードエディタ ✨</h1>
+  <p>ブラウザだけでコードを書いて、全画面プレビューできる！</p>
+</header>
+
+<main>
+  <a href="code.html" class="button">
+    <i class="fa fa-code"></i> コードを書く
+  </a>
+  <a href="view.html" class="button">
+    <i class="fa fa-eye"></i> プレビューを見る
+  </a>
+</main>
+
+<footer>
+  <p>GitHub Pagesで簡単にシェア可能</p>
+</footer>
+
+</body>
+</html>

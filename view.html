@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>コードプレビュー</title>
+<style>
+  body, html { margin: 0; height: 100%; overflow: hidden; }
+    iframe { width: 100%; height: 100%; border: none; }
+    </style>
+    </head>
+    <body>
+    <iframe id="viewer"></iframe>
+    
+    <script>
+    const code = localStorage.getItem('userCode') || '<h1>まだコードが保存されていません</h1>';
+    document.getElementById('viewer').srcdoc = code;
+    </script>
+    </body>
+    </html>>
