@@ -31,11 +31,12 @@
 ## 注意
 - JavaScript を書く場合、セキュリティには注意してください
 - 他の端末ではコードは同期されません
+- GASとほぼ同じ(`href`使えません)
 
 ---
 
 ## デモ
-[GitHub Pages でのデモはこちら](https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/)
+[GitHub Pages でのデモはこちら](https://math-u-t.github.io/html-full-screen-viewer/)
 
 ---
 
