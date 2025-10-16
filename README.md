@@ -15,8 +15,9 @@ HTML、CSS、JavaScriptを個別に編集し、統合してプレビューでき
 - リアルタイム全画面プレビュー
 - localStorage による永続化
 - GitHub Pages にそのままデプロイ可能
+- `button`で動作する多様な機能
 
-## ファイル構造
+## 主なファイル構造
 
 ```
 repository/
@@ -25,8 +26,7 @@ repository/
 │   ├── html.html          # HTMLエディタ
 │   ├── css.html           # CSSエディタ
 │   └── js.html            # JavaScriptエディタ
-└── view/
-    └── html.html          # 全画面プレビュー
+└── view.html              # 全画面プレビュー
 ```
 
 ## 使い方
@@ -67,7 +67,7 @@ repository/
 /code/html.html?code=プロジェクト名   # HTMLエディタ
 /code/css.html?code=プロジェクト名    # CSSエディタ
 /code/js.html?code=プロジェクト名     # JavaScriptエディタ
-/view/html.html?code=プロジェクト名   # 全画面プレビュー
+/view.html?code=プロジェクト名   # 全画面プレビュー
 ```
 
 ## デプロイ方法
@@ -107,21 +107,6 @@ code_{コード名}_{ファイルタイプ}
 - `code_my-project_css`
 - `code_my-project_js`
 
-### データモデル
-
-**状態空間**: S = {(c, t, d) | c ∈ C, t ∈ T, d ∈ D}
-- C: コード名の集合
-- T: {html, css, js}
-- D: コンテンツ文字列
-
-**操作**:
-- CREATE(c): 新規プロジェクト作成
-- SAVE(c, t, d): ファイル保存
-- RENAME(c₁, c₂): 名前変更
-- DELETE(c): プロジェクト削除
-
-**プレビュー生成**: π(c) = merge(HTML(c), CSS(c), JS(c))
-
 ## キーボードショートカット
 
 エディタ内：
@@ -150,8 +135,4 @@ MIT License
 
 ## 貢献
 
-Issue や Pull Request を歓迎します。
-
-## 作者
-
-数学的に厳密な設計により構築されました。
+[Issue](https://github.com/math-u-t/html-full-screen-viewer/issues) や [Pull Request](https://github.com/math-u-t/html-full-screen-viewer/pulls) を歓迎します。
