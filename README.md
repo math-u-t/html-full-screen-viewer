@@ -20,12 +20,20 @@ HTML、CSS、JavaScriptを個別に編集し、統合してプレビューでき
 ## 主なファイル構造
 
 ```
-repository/
+html-full-screen-viewer/
 ├── index.html              # メニューページ
 ├── code/
 │   ├── html.html          # HTMLエディタ
 │   ├── css.html           # CSSエディタ
 │   └── js.html            # JavaScriptエディタ
+├── script/
+│   ├── XXX-edit.js      # XXXエディターのファイル
+│   ├── index.js         # index.htmlのソース
+│   └── view.js          # プレビュー
+├── style/
+│   ├── code.css           # XXXエディターのファイル
+│   ├── index.css          # index.htmlのソース
+│   └── view.css           # プレビュー
 └── view.html              # 全画面プレビュー
 ```
 
