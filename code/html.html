@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Editor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #2d2d30;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #3e3e42;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .code-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    .file-type {
+      background: #e74c3c;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    .header-right {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: #007acc;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #005a9e;
+    }
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+    .btn-success:hover {
+      background: #218838;
+    }
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+    .editor-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    textarea {
+      flex: 1;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border: none;
+      padding: 20px;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+      tab-size: 2;
+    }
+    textarea::selection {
+      background: #264f78;
+    }
+    .status-bar {
+      background: #007acc;
+      color: white;
+      padding: 8px 20px;
+      font-size: 0.85em;
+      display: flex;
+      justify-content: space-between;
+    }
+    .toast {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+    .toast.show {
+      display: block;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <span class="code-name" id="codeName">Loading...</span>
+      <span class="file-type">HTML</span>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-primary" onclick="saveCode()">💾 保存</button>
+      <button class="btn btn-success" onclick="saveAndView()">👁️ 保存してプレビュー</button>
+      <a href="../index.html" class="btn btn-secondary">← メニューへ</a>
+    </div>
+  </header>
+
+  <div class="editor-container">
+    <textarea id="codeEditor" spellcheck="false"></textarea>
+  </div>
+
+  <div class="status-bar">
+    <span>HTML Editor</span>
+    <span id="charCount">0 characters</span>
+  </div>
+
+  <div class="toast" id="toast">保存しました！</div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeName = urlParams.get('code');
+    const editor = document.getElementById('codeEditor');
+    const storageKey = `code_${codeName}_html`;
+
+    if (!codeName) {
+      alert('コード名が指定されていません');
+      window.location.href = '../index.html';
+    }
+
+    document.getElementById('codeName').textContent = codeName;
+
+    function loadCode() {
+      const savedCode = localStorage.getItem(storageKey);
+      if (savedCode !== null) {
+        editor.value = savedCode;
+      } else {
+        editor.value = '<!DOCTYPE html>\n<html>\n<head>\n <title>My Page</title>\n</head>\n<body>\n <h1>Hello World</h1>\n</body>\n</html>';
+      }
+      updateCharCount();
+    }
+
+    function saveCode() {
+      localStorage.setItem(storageKey, editor.value);
+      showToast();
+    }
+
+    function saveAndView() {
+      saveCode();
+      window.location.href = `../view/html.html?code=${encodeURIComponent(codeName)}`;
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    function updateCharCount() {
+      document.getElementById('charCount').textContent = `${editor.value.length} characters`;
+    }
+
+    editor.addEventListener('input', updateCharCount);
+
+    editor.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + ' ' + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 2;
+        updateCharCount();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveCode();
+      }
+    });
+
+    loadCode();
+  </script>
+</body>
+</html>
