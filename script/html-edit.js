@@ -23,7 +23,7 @@ require.config({
 require(['vs/editor/editor.main'], function() {
   const savedCode = localStorage.getItem(storageKey);
   const initialCode = savedCode !== null ? savedCode :
-    '<!DOCTYPE html>\n<html>\n<head>\n <title>My Page</title>\n</head>\n<body>\n <h1>Hello World</h1>\n</body>\n</html>';
+    '<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Hello World</h1>\n</body>\n</html>';
 
   editorInstance = monaco.editor.create(document.getElementById('editor'), {
     value: initialCode,

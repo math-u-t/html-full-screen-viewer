@@ -27,7 +27,7 @@ require(['vs/editor/editor.main'], function() {
 
   editorInstance = monaco.editor.create(document.getElementById('editor'), {
     value: initialCode,
-    language: 'js',
+    language: 'javascript',
     theme: currentTheme,
     automaticLayout: true,
   });
